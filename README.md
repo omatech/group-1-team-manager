@@ -1,2 +1,2 @@
 # group-1-team-manager
-Team manager project of Group 1
+Team manager project of Group SADIS
