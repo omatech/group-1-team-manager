@@ -1,0 +1,96 @@
+@startuml
+title Domain Model
+class HourAdjustment
+class Invoice
+class RectifyingInvoice
+class InvoiceManager
+class Notification
+class Employee{
+- alias
+- bizneoAlias
+- joinDate
+- leaveDate
+hourReporting(startDate, endDate)
+}
+class Hosting{
+- title
+- description
+- periodicity
+- fee
+}
+class Project{
+- title
+- description
+- fee
+}
+class PurchaseOrder{
+- number
+- startDate
+- totalHours
+remainingHours()
+}
+class Task{
+- day
+- hours
+- description
+}
+class HourAdjustment{
+- day
+- description
+- hours
+}
+class TaskGroup{
+- title
+- hoursBudget
+remainingHours()
+}
+class Invoice {
+- date
+- base
+- tax
+- total()
+}
+class Company{
+- cif
+}
+class DaysOff{
+- day
+}
+class Invoices <<Excel>> {
+- startDate
+- endDate
+}
+class User {
+- email
+- password
+}
+User <|-- Employee
+User <|-- ExternalReviewer
+User <|-- InvoiceManager
+User -- “n” Notification
+Client o-- “n” Company
+Project o-- ExternalReviewer
+Project o-- “n” TaskGroup
+Project o-- “n” PurchaseOrder
+TaskGroup o-- “n” Task
+TaskGroup o-- “n” HourAdjustment
+Invoices  *-- “n” Invoice
+InvoiceManager -- “n” Invoices
+InvoiceManager -- “n” HourAdjustment
+Company o-- “n” Project
+Company o-- “n” Hosting
+Project *-- Task
+Project *-- HourAdjustment
+Project “0-1" o-- “n” Invoice
+Employee -- “n” Task
+Invoice <|-- RectifyingInvoice
+Invoice <|-- StandardInvoice
+Invoice “n” --o “1" PurchaseOrder
+Invoice “n” --o “0-1" Hosting
+HourAdjustment <|-- StandardInvoiceHourAdjustment
+HourAdjustment <|-- ComercialHourAdjustment
+HourAdjustment <|-- RectifyingInvoiceHourAdjustment
+RectifyingInvoiceHourAdjustment -- RectifyingInvoice
+StandardInvoiceHourAdjustment -- StandardInvoice
+Employee *-- DaysOff
+@enduml
