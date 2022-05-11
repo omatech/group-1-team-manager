@@ -48,6 +48,7 @@ class Invoice {
 - date
 - base
 - tax
+- status
 - total()
 }
 class Company{
@@ -67,7 +68,7 @@ class User {
 User <|-- Employee
 User <|-- ExternalReviewer
 User <|-- InvoiceManager
-User -- “n” Notification
+User <-up- “n” Notification
 Client o-- “n” Company
 Project o-- ExternalReviewer
 Project o-- “n” TaskGroup
@@ -82,9 +83,10 @@ Company o-- “n” Hosting
 Project *-- Task
 Project *-- HourAdjustment
 Project “0-1" o-- “n” Invoice
-Employee -- “n” Task
+Employee <-- “n” Task
 Invoice <|-- RectifyingInvoice
 Invoice <|-- StandardInvoice
+StandardInvoice "n"<-- RectifyingInvoice
 Invoice “n” --o “1" PurchaseOrder
 Invoice “n” --o “0-1" Hosting
 HourAdjustment <|-- StandardInvoiceHourAdjustment
