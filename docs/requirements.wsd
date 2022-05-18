@@ -10,7 +10,7 @@ class Employee{
 - bizneoAlias
 - joinDate
 - leaveDate
-hourReporting(startDate, endDate)
+- hourReporting(?startDate, ?endDate, ?project)
 }
 class Hosting{
 - title
@@ -20,8 +20,9 @@ class Hosting{
 }
 class Project{
 - title
-- description
+- descriptionT
 - fee
+- deadline
 }
 class PurchaseOrder{
 - number
@@ -29,7 +30,7 @@ class PurchaseOrder{
 - totalHours
 remainingHours()
 }
-class Task{
+class Entry{
 - day
 - hours
 - description
@@ -39,10 +40,12 @@ class HourAdjustment{
 - description
 - hours
 }
-class TaskGroup{
+class EntryGroup{
 - title
 - hoursBudget
-remainingHours()
+- fee
+- deadline
+- remainingHours()
 }
 class Invoice {
 - date
@@ -71,28 +74,23 @@ User <|-- InvoiceManager
 User <-up- “n” Notification
 Client o-- “n” Company
 Project o-- ExternalReviewer
-Project o-- “n” TaskGroup
+Project o-- “n” EntryGroup
 Project o-- “n” PurchaseOrder
-TaskGroup o-- “n” Task
-TaskGroup o-- “n” HourAdjustment
+EntryGroup o-- “n” Entry
+EntryGroup o-- “n” HourAdjustment
 Invoices  *-- “n” Invoice
 InvoiceManager -- “n” Invoices
 InvoiceManager -- “n” HourAdjustment
 Company o-- “n” Project
 Company o-- “n” Hosting
-Project *-- Task
+Project *-- Entry
 Project *-- HourAdjustment
 Project “0-1" o-- “n” Invoice
-Employee <-- “n” Task
+Employee <-- “n” Entry
 Invoice <|-- RectifyingInvoice
 Invoice <|-- StandardInvoice
 StandardInvoice "n"<-- RectifyingInvoice
 Invoice “n” --o “1" PurchaseOrder
 Invoice “n” --o “0-1" Hosting
-HourAdjustment <|-- StandardInvoiceHourAdjustment
-HourAdjustment <|-- ComercialHourAdjustment
-HourAdjustment <|-- RectifyingInvoiceHourAdjustment
-RectifyingInvoiceHourAdjustment -- RectifyingInvoice
-StandardInvoiceHourAdjustment -- StandardInvoice
 Employee *-- DaysOff
 @enduml

@@ -1,0 +1,35 @@
+@startuml
+
+left to right direction
+
+actor User
+actor Employee
+actor Time
+actor InvoiceManager
+actor ExternalReviewer
+
+User <|-- Employee
+User <|-- InvoiceManager
+User <|-- ExternalReviewer
+
+package UserUseCases {
+User --> (Login)
+User --> (Logout)
+}
+
+package EmployeeEntryUseCases {
+Employee --> (Create employeeEntry)
+Employee --> (Update employeeEntry)
+Employee --> (Delete employeeEntry)
+}
+
+package EmployeeUseCases {
+Time --> (Synchronize employees)
+}
+
+package HourReportingUseCases {
+ExternalReviewer --> (View project hour reporting)
+Employee --> (View employee hour reporting)
+}
+
+@enduml
