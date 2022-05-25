@@ -1,35 +1,89 @@
 @startuml
-
 left to right direction
-
 actor User
 actor Employee
 actor Time
-actor InvoiceManager
+actor FinancialManager
 actor ExternalReviewer
-
+actor ProjectManager
 User <|-- Employee
-User <|-- InvoiceManager
+User <|-- FinancialManager
 User <|-- ExternalReviewer
-
+User <|-- ProjectManager
 package UserUseCases {
 User --> (Login)
 User --> (Logout)
 }
-
+package FinancialUseCases {
+package InvoiceUseCases{
+FinancialManager --> (Generate Invoices excel)
+FinancialManager --> (View Invoices)
+FinancialManager --> (View Invoice)
+FinancialManager --> (Create Invoice)
+FinancialManager --> (Update Invoice)
+FinancialManager --> (Delete Invoice)
+}
+package HoldingUseCases{
+FinancialManager --> (View Holdings)
+FinancialManager --> (View Holding)
+FinancialManager --> (Create Holding)
+FinancialManager --> (Update Holding)
+FinancialManager --> (Delete Holding)
+}
+package CompanyUseCases{
+FinancialManager --> (View Companies)
+FinancialManager --> (View Company)
+FinancialManager --> (Create Company)
+FinancialManager --> (Update Company)
+FinancialManager --> (Delete Company)
+}
+package ContractUseCases{
+FinancialManager --> (View unbilled Contracts)
+FinancialManager --> (View Contracts)
+FinancialManager --> (View Contract)
+FinancialManager --> (Create Contract)
+FinancialManager --> (Update Contract)
+FinancialManager --> (Delete Contract)
+}
+package PurchaseOrderUseCases{
+FinancialManager --> (View PurchaseOrder)
+FinancialManager --> (Create PurchaseOrder)
+FinancialManager --> (Update PurchaseOrder)
+FinancialManager --> (Delete PurchaseOrder)
+}
+}
+package ProjectManagerUseCases {
+package ProjectUseCases{
+ProjectManager --> (View Projects)
+ProjectManager --> (View Project)
+ProjectManager --> (Create Project)
+ProjectManager --> (Update Project)
+ProjectManager --> (Delete Project)
+}
+package AssumedEntryUseCases{
+ProjectManager --> (Create AssumedEntry)
+ProjectManager --> (Update AssumedEntry)
+ProjectManager --> (Delete AssumedEntry)
+}
+package SubProjectUseCases{
+ProjectManager --> (Create SubProject)
+ProjectManager --> (Update SubProject)
+ProjectManager --> (Delete SubProject)
+}
+}
 package EmployeeEntryUseCases {
-Employee --> (Create employeeEntry)
-Employee --> (Update employeeEntry)
-Employee --> (Delete employeeEntry)
+Employee --> (Create EmployeeEntry)
+Employee --> (Update EmployeeEntry)
+Employee --> (Delete EmployeeEntry)
+ProjectManager --> (Create EmployeeEntry)
+ProjectManager --> (Update EmployeeEntry)
+ProjectManager --> (Delete EmployeeEntry)
 }
-
 package EmployeeUseCases {
-Time --> (Synchronize employees)
+Time --> (Synchronize employees days off)
 }
-
 package HourReportingUseCases {
 ExternalReviewer --> (View project hour reporting)
 Employee --> (View employee hour reporting)
 }
-
 @enduml
