@@ -1,0 +1,22 @@
+@startuml
+title Create Entry Use Case
+
+state x1 <<choice>>
+state x2
+state x3 <<choice>>
+
+[*] --> x1
+note on link
+User request createEntry
+<b>System requires:</b>
+* Select a project
+end note
+
+x1 --> x2 : [is Employee]
+x1 --> x3 : [is FinancialManager]
+note on link
+<b>System requires:</b>
+* Select type of Entry
+end note
+
+@enduml
